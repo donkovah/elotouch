@@ -18,19 +18,24 @@ trait ValidateTraits
         if (!$token) {
             throw new Exception('Token not supplied');
         }
-        $key = getenv('JWT_SEC_KEY');
+        $bearer = explode(' ', $token)[0] ?? null;
+        $token = explode(' ', $token)[1] ?? null;
+        if($bearer !== 'Bearer' && !$token){
+            throw new Exception('Oops, something went wrong');
+        }
+        $key = 'JWT_SEC_KEY';
         $signer = new Sha256();
         try {
             $token = (new Parser())->parse((string) $token);
             $data = new ValidationData();
-            $data->setIssuer('HTTP_SERVER');
+            $data->setIssuer(getenv('HTTP_SERVER'));
             $data->setId('4f1g23a12aa');
             if (!$token->validate($data) || !$token->verify($signer, $key)) {
                 throw new Exception('Token has expired');
             }
             return true;
         } catch (\Throwable $th) {
-            throw new Exception('Invalid token');
+            throw new Exception('Oops, Something went wrong.');
         }
     }
 }

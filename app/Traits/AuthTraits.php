@@ -32,9 +32,9 @@ trait AuthTraits
         $time = time();
         $signer = new Sha256();
         $time = time();
-        $key = new Key(getenv('JWT_SEC_KEY'));
+        $key = new Key('JWT_SEC_KEY');
         
-        $token = (new Builder())->issuedBy('HTTP_SERVER') // Configures the issuer (iss claim)
+        $token = (new Builder())->issuedBy(getenv('HTTP_SERVER')) // Configures the issuer (iss claim)
                                 ->identifiedBy('4f1g23a12aa', true) // Configures the id (jti claim), replicating as a header item
                                 ->issuedAt($time) // Configures the time that the token was issue (iat claim)
                                 ->canOnlyBeUsedAfter($time + 1) // Configures the time that the token can be used (nbf claim)
@@ -45,25 +45,4 @@ trait AuthTraits
         return $res;
     }
 
-    public static function validate($token = null)
-    {
-        $token = $_SERVER['HTTP_AUTHORIZATION'] ?? null;
-        if (!$token) {
-            throw new Exception('Token not supplied');
-        }
-        $key = getenv('JWT_SEC_KEY');
-        $signer = new Sha256();
-        try {
-            $token = (new Parser())->parse((string) $token);
-            $data = new ValidationData();
-            $data->setIssuer('HTTP_SERVER');
-            $data->setId('4f1g23a12aa');
-            if (!$token->validate($data) || !$token->verify($signer, $key)) {
-                throw new Exception('Token has expired');
-            }
-            return true;
-        } catch (\Throwable $th) {
-            throw new Exception('Invalid token');
-        }
-    }
 }

@@ -15,6 +15,5 @@ try {
   header('Content-Type: application/json;charset=utf-8');
   return $router->dispatch(Request::uri(), Request::method());
 } catch (\Throwable $th) {
-  // var_dump($th); die;
   echo json_encode(['status' => 400, 'message' => $th->getMessage()]);
 }
