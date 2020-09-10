@@ -1,8 +1,9 @@
 <?php
 
 return [
-    'mobnia' => ['GET', 'HomeController@index'],
+    'migrate' => ['GET', 'HomeController@index'],
+    'seed' => ['GET', 'HomeController@seedTable'],
     'people' => ['GET', 'PeopleController@index'],
     'people/:id' => ['GET', 'PeopleController@show'],
-    'auth/' => ['POST', 'AuthController@login'],
+    'login' => ['POST', 'AuthController@login'],
 ];

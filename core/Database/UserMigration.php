@@ -5,12 +5,13 @@ require dirname(__DIR__, 1)."/bootstrap.php";
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
-class PeopleMigration{
+class UserMigration{
     public function migrate()
     {
-        Capsule::schema()->create('people', function ($table) {
+        Capsule::schema()->create('users', function ($table) {
                $table->increments('id');
-               $table->string('name');
+               $table->string('email')->unique();
+               $table->string('password');
                $table->timestamps();
            });
     }

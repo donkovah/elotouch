@@ -10,12 +10,8 @@ class TicketsMigration{
     {
         Capsule::schema()->create('tickets', function ($table) {
                $table->increments('id');
+               $table->string('person_id');
                $table->string('name');
-               $table->string('email')->unique();
-               $table->string('password');
-               $table->string('userimage')->nullable();
-               $table->string('api_key')->nullable()->unique();
-               $table->rememberToken();
                $table->timestamps();
            });
     }

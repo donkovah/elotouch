@@ -1,10 +1,11 @@
 <?php
 namespace App\Service;
 
-use App\Traits\PeopleTraits;
+use App\Traits\AuthTraits;
 use Mobnia\Contracts\AuthServiceInterface;
+use Mobnia\Contracts\ValidateUserInterface;
 
-class PeopleService implements AuthServiceInterface
+class AuthService implements AuthServiceInterface
 {
-    use PeopleTraits;
+    use AuthTraits;
 }

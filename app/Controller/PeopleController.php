@@ -2,12 +2,14 @@
 namespace App\Controller;
 
 use App\Service\PeopleService;
+use App\Service\ValidateService;
 
 class PeopleController
 {
     protected $service;
 
     public function __construct() {
+        ValidateService::validateUser(); // All routes are protected
         $this->service = new PeopleService();
     }
 
@@ -22,4 +24,5 @@ class PeopleController
         $person = $this->service->showPerson($personId);
         echo json_encode(['status' => 200, 'data' => $person]);
     }
+
 }
