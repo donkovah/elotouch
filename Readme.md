@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is built with PHP framework and it is meant for development purpose only.
+This project is built with PHP and it is meant for development purpose only.
 
 ## Installation
 
