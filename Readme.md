@@ -9,6 +9,7 @@ This project is built with PHP and it is meant for development purpose only.
 Please follow the steps below to configure your development enviroment locally.
 
  - Clone this repository in your local enviroment using `git clone https://github.com/donkovah/elotouch`
+ - CD into your project folder and run ***composer install***
  - Start your development server using ***php -S localhost:8000***
  - create your local database and update the DB details located in ***core/Bootstrap.php***
  - visit **/migrate** route to migrate the app tables to your database
